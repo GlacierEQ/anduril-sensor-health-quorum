@@ -1,0 +1,31 @@
+{
+  "schema": "glaciereq.repo-target-contract.v1",
+  "identity": {
+    "repository_id": "GlacierEQ/anduril-sensor-health-quorum",
+    "local_path": "/Users/kcbflux/job-app/repos/anduril-sensor-health-quorum"
+  },
+  "current": {
+    "state": "VERTICAL_SLICE",
+    "implemented": true,
+    "tested": false,
+    "deployed": false
+  },
+  "target": {
+    "purpose": "# ISSUE CONTRACT\n## Pain\nFailed/noisy sensors still vote as equals and corrupt fusion.\n## Success\n- Peer health scores\n- Below-threshold sensors suspended\n- Quorum required to reinstate\n",
+    "central_bottleneck": "see ISSUE_CONTRACT"
+  },
+  "invariants": [],
+  "promotion": {
+    "required_tests": [
+      "unit",
+      "adversarial"
+    ],
+    "require_exact_source_sha": true,
+    "require_receipt": true,
+    "require_nonclaims": true
+  },
+  "nonclaims": [
+    "no employer affiliation",
+    "reference implementation only"
+  ]
+}
