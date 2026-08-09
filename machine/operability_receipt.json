@@ -1,7 +1,7 @@
 {
   "schema": "glaciereq.operability-receipt.v1",
   "repository": "GlacierEQ/anduril-sensor-health-quorum",
-  "at": "2026-08-09T07:32Z",
+  "at": "2026-08-09T07:40Z",
   "source_sha": "e9504aa1a9c334cf765303dbae558202e2e1382bd4cdc9005155fc00ebdf1772",
   "entry": "scripts/operate.py",
   "primary_output": {
@@ -12,5 +12,6 @@
     "sensor": "s2"
   },
   "dual_run_ok": true,
-  "result": "PASS"
+  "result": "PASS",
+  "scratch_launch_log": "wave_a/anduril-sensor-health-quorum/launch.log"
 }

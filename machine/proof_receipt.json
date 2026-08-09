@@ -2,27 +2,30 @@
   "schema": "glaciereq.proof-receipt.v1",
   "repository": "GlacierEQ/anduril-sensor-health-quorum",
   "source_sha": "e9504aa1a9c334cf765303dbae558202e2e1382bd4cdc9005155fc00ebdf1772",
-  "proof_id": "wave-a-residual-anduril-sensor-health-quorum-1786260727",
+  "proof_id": "wave-a-residual-green-anduril-sensor-health-quorum-1786261245",
   "environment": {
-    "python": "3.9.6"
+    "python": "3.9.6",
+    "PYTHONPATH": "."
   },
   "tests": [
-    "unittest discover -s tests -v (x2)"
+    "PYTHONPATH=. python3 -m unittest discover -s tests -v (x2)"
   ],
   "adversarial_tests": [
     "tests/test_adversarial.py"
   ],
   "runtime": {
     "operate": "scripts/operate.py (x2)",
-    "dual_run_ok": true
+    "dual_run_ok": true,
+    "proof_dual_run_ok": true
   },
   "result": "PASS",
   "limitations": [
     "not production deployed",
     "reference implementation only"
   ],
-  "timestamp": "2026-08-09T07:32Z",
+  "timestamp": "2026-08-09T07:40Z",
   "artifact_hashes": {
-    "operability_receipt": "4bee0ea8ec6e529efd6fd449e187d5e12e848a641a2f01c8ba90375dee658231"
-  }
+    "operability_receipt": "c260be61e54152ba1ce6746cbf4a132f2cb78ef5c585755fdd80ec60431c48a5"
+  },
+  "scratch_proof_log": "wave_a/anduril-sensor-health-quorum/proof.log"
 }
