@@ -1,14 +1,15 @@
 {
   "schema": "glaciereq.proof-receipt.v1",
   "repository": "GlacierEQ/anduril-sensor-health-quorum",
-  "source_sha": "e9504aa1a9c334cf765303dbae558202e2e1382bd4cdc9005155fc00ebdf1772",
-  "proof_id": "wave-a-residual-green-anduril-sensor-health-quorum-1786261245",
+  "source_sha": "12ce9998226681b6d0666c50f4f301d09ed3ffe6538efde5b9dfb811be43c5db",
+  "proof_id": "elite-anduril-sensor-health-quorum-1786335149",
   "environment": {
-    "python": "3.9.6",
-    "PYTHONPATH": "."
+    "python": "/Users/kcbflux/job-app/excellence/.venv-elite/bin/python",
+    "PYTHONPATH": "/Users/kcbflux/job-app/repos/anduril-sensor-health-quorum:/Users/kcbflux/job-app/repos/anduril-sensor-health-quorum/src",
+    "entry": "unittest"
   },
   "tests": [
-    "PYTHONPATH=. python3 -m unittest discover -s tests -v (x2)"
+    "/Users/kcbflux/job-app/excellence/.venv-elite/bin/python -m unittest discover -s tests -v (x2)"
   ],
   "adversarial_tests": [
     "tests/test_adversarial.py"
@@ -23,9 +24,8 @@
     "not production deployed",
     "reference implementation only"
   ],
-  "timestamp": "2026-08-09T07:40Z",
+  "timestamp": "2026-08-10T04:12Z",
   "artifact_hashes": {
-    "operability_receipt": "c260be61e54152ba1ce6746cbf4a132f2cb78ef5c585755fdd80ec60431c48a5"
-  },
-  "scratch_proof_log": "wave_a/anduril-sensor-health-quorum/proof.log"
+    "operability_receipt": "c619be7853d8b688d111505a533c4983300af9eee9b5716574df226c76cc0329"
+  }
 }

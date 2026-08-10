@@ -1,10 +1,11 @@
 {
   "schema": "glaciereq.promotion-authority-grant.v1",
   "repository": "GlacierEQ/anduril-sensor-health-quorum",
-  "source_sha": "e9504aa1a9c334cf765303dbae558202e2e1382bd4cdc9005155fc00ebdf1772",
-  "proof_receipt_digest": "742197bcf438ad62ec0f5e34f371e11e8360bffb8be416479f781ae923ed8538",
-  "not_after": 1786347645.105215,
-  "mac": "89570f3078c4337d116ef171bb55df75c14aa2abeab5bc56fce5f3080669e3af",
+  "source_sha": "12ce9998226681b6d0666c50f4f301d09ed3ffe6538efde5b9dfb811be43c5db",
+  "proof_receipt_digest": "f54d291fc3de8153c0c0332ccefbc7132e30dc8a669f9ce94c4f608bb408b617",
+  "not_after": 1788927149.234226,
+  "mac": "7e46aa2cf74238eae509590ef8ae26c25de4b87d83c6e382114415e00cdaf436",
   "issuer": "local_operator_promotion_authority",
-  "verified": true
+  "verified": true,
+  "secret_ref": "src/promotion_authority.py::LOCAL_OPERATOR_SECRET"
 }
