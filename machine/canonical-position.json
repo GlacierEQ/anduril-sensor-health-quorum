@@ -1,0 +1,22 @@
+{
+  "schema": "glaciereq.repo-canonical-position.v1",
+  "repository": "GlacierEQ/anduril-sensor-health-quorum",
+  "position_state": "RESOLVED",
+  "role": "company_specific_specialist_system",
+  "company_target": "Anduril",
+  "canonical_identity": "sensor-health-quorum",
+  "unique_value": [
+    "sensor voting authority changes with observed peer health rather than remaining static",
+    "below-threshold sensors are suspended instead of silently trusted",
+    "reinstatement requires quorum evidence rather than unilateral recovery"
+  ],
+  "capability_contribution": {
+    "family": "sensor_health_authority_quorum",
+    "extractable_mechanisms": ["health-sensitive voting authority", "quorum reinstatement", "observable sensor suspension"],
+    "ownership": "This repository remains the owning Anduril-specialist implementation; extraction preserves identity and lineage."
+  },
+  "integration_policy": {"preserve_repository_identity":true,"preserve_lineage":true,"presentation_independent":true,"size_or_loc_not_dispositive":true,"absorption_requires_functional_equivalence":true,"absorption_requires_proof_equivalence":true},
+  "next_evolution": "Add correlated-fault detection, recovery hysteresis, and quorum weighting that remains explainable under degraded multi-sensor conditions.",
+  "evidence_refs": ["ISSUE_CONTRACT.md","machine/target-contract.json","machine/proof_receipt.json","machine/operability_receipt.json","machine/promotion_authority.json"],
+  "nonclaims": ["no Anduril affiliation", "not a production sensor-fusion control service"]
+}
