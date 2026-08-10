@@ -1,0 +1,9 @@
+{
+  "schema": "glaciereq.elite-leaf-gap.v1",
+  "repository": "GlacierEQ/anduril-sensor-health-quorum",
+  "at": "2026-08-10T05:49Z",
+  "blocker": "TESTS_FAIL",
+  "evidence": "leaves/anduril-sensor-health-quorum/proof.log+launch.log",
+  "not_promoted_reason": "pr_ok=False ran=11 op_ok=True primary_ok=True",
+  "principal_state_claim": null
+}
