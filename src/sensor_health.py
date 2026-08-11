@@ -126,7 +126,7 @@ class SensorHealthQuorum:
             raise ValueError("health")
         if reporter == subject:
             raise ValueError("SELF_REPORT_FORBIDDEN")
-        domain = fault_domain or reporter
+        domain = reporter if fault_domain is None else fault_domain
         if not domain:
             raise ValueError("fault_domain")
         if round_id == "":
