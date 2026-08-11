@@ -13,19 +13,27 @@
     "operable": true,
     "proof_receipt_bound": true,
     "authority_bound": true,
-    "deployed": false
+    "deployed": false,
+    "completed_evolution": {
+      "cursor": "next:correlated_fault_detection_recovery_hysteresis_and_explainable_weighting",
+      "candidate_source_sha": "eaf59fa675a2f0e21a58242cd5a78ab3ea656a19",
+      "workflow_run": 31453906929,
+      "python": "PASS",
+      "go": "PASS"
+    }
   },
   "target": {
     "purpose": "Prevent failed, noisy, or correlated sensors from retaining disproportionate voting authority by making health, correlation domains, suspension, and bounded reinstatement explicit quorum-governed state.",
-    "central_bottleneck": "A simple per-report EMA can mistake many correlated reports for independent evidence and can reinstate a suspended sensor after one favorable threshold crossing.",
-    "current_cursor": "next:correlated_fault_detection_recovery_hysteresis_and_explainable_weighting",
-    "success": [
-      "Reports from the same fault domain do not multiply independent quorum weight.",
-      "Health decisions expose domain-level scores, effective weights, transitions, and recovery state.",
-      "Below-threshold sensors remain suspended rather than silently trusted.",
-      "Reinstatement requires multiple distinct healthy recovery rounds backed by a minimum number of independent domains.",
-      "Python and Go preserve the same authority semantics."
-    ]
+    "current_mechanisms": [
+      "one effective independent weight per caller-labeled fault domain",
+      "domain-level explainable health and weighting receipts",
+      "suspension below the health threshold",
+      "minimum independent-domain evidence for recovery",
+      "multiple distinct recovery rounds before reinstatement",
+      "Python and Go authority parity"
+    ],
+    "next_cursor": "next:authenticated_fault_domain_attestation_evidence_freshness_and_durable_decision_receipt_chain",
+    "next_bottleneck": "fault_domain and round_id are currently caller-supplied labels; peer evidence also lacks freshness expiry and decision receipts are not durably chained"
   },
   "invariants": [
     "correlated reporters cannot manufacture independent quorum authority by multiplicity alone",
@@ -50,11 +58,14 @@
   "nonclaims": [
     "no Anduril affiliation",
     "reference engineering system, not a production sensor-fusion deployment",
-    "fault_domain and round_id are caller-supplied evidence labels; this mechanism does not authenticate their external provenance"
+    "fault_domain and round_id are caller-supplied evidence labels and are not externally authenticated",
+    "stored peer evidence does not yet expire automatically",
+    "health decision receipts are not yet durably append-only chained"
   ],
+  "evolution_receipt": "machine/evolution-receipts/2026-08-11-correlated-health-hysteresis.json",
   "repair": {
     "reason": "Removed unresolved Git conflict markers that made the prior target contract invalid JSON.",
     "base_sha": "c0d3949f8aa3614db7fcb52127ee05edcdcb38ab"
   },
-  "frozen_at": "2026-08-11T02:50:00Z"
+  "frozen_at": "2026-08-11T03:00:00Z"
 }
