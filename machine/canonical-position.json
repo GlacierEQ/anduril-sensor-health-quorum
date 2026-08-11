@@ -7,16 +7,53 @@
   "canonical_identity": "sensor-health-quorum",
   "unique_value": [
     "sensor voting authority changes with observed peer health rather than remaining static",
+    "correlated reporters share one fault-domain quorum weight instead of multiplying authority by count",
     "below-threshold sensors are suspended instead of silently trusted",
-    "reinstatement requires quorum evidence rather than unilateral recovery"
+    "reinstatement requires independent domains and multiple distinct healthy recovery rounds",
+    "health decisions expose domain weights, suspension transitions, recovery state, and reasons"
   ],
   "capability_contribution": {
     "family": "sensor_health_authority_quorum",
-    "extractable_mechanisms": ["health-sensitive voting authority", "quorum reinstatement", "observable sensor suspension"],
+    "extractable_mechanisms": [
+      "health-sensitive voting authority",
+      "correlation-aware fault-domain weighting",
+      "bounded multi-round recovery hysteresis",
+      "explainable domain-level decision receipts",
+      "observable sensor suspension and reinstatement"
+    ],
     "ownership": "This repository remains the owning Anduril-specialist implementation; extraction preserves identity and lineage."
   },
-  "integration_policy": {"preserve_repository_identity":true,"preserve_lineage":true,"presentation_independent":true,"size_or_loc_not_dispositive":true,"absorption_requires_functional_equivalence":true,"absorption_requires_proof_equivalence":true},
-  "next_evolution": "Add correlated-fault detection, recovery hysteresis, and quorum weighting that remains explainable under degraded multi-sensor conditions.",
-  "evidence_refs": ["ISSUE_CONTRACT.md","machine/target-contract.json","machine/proof_receipt.json","machine/operability_receipt.json","machine/promotion_authority.json"],
-  "nonclaims": ["no Anduril affiliation", "not a production sensor-fusion control service"]
+  "integration_policy": {
+    "preserve_repository_identity": true,
+    "preserve_lineage": true,
+    "presentation_independent": true,
+    "size_or_loc_not_dispositive": true,
+    "absorption_requires_functional_equivalence": true,
+    "absorption_requires_proof_equivalence": true
+  },
+  "completed_evolution": {
+    "cursor": "next:correlated_fault_detection_recovery_hysteresis_and_explainable_weighting",
+    "receipt": "machine/evolution-receipts/2026-08-11-correlated-health-hysteresis.json",
+    "candidate_source_sha": "eaf59fa675a2f0e21a58242cd5a78ab3ea656a19",
+    "workflow_run": 31453906929,
+    "python": "PASS",
+    "go": "PASS"
+  },
+  "next_evolution": "Authenticate fault-domain and recovery-round attestations, expire stale peer evidence, and chain health decisions to durable append-only receipts without weakening correlation-aware suspension/recovery semantics.",
+  "next_evolution_cursor": "next:authenticated_fault_domain_attestation_evidence_freshness_and_durable_decision_receipt_chain",
+  "evidence_refs": [
+    "ISSUE_CONTRACT.md",
+    "machine/target-contract.json",
+    "machine/proof_receipt.json",
+    "machine/operability_receipt.json",
+    "machine/promotion_authority.json",
+    "machine/evolution-receipts/2026-08-11-correlated-health-hysteresis.json"
+  ],
+  "nonclaims": [
+    "no Anduril affiliation",
+    "not a production sensor-fusion control service",
+    "fault_domain and round_id are caller-supplied evidence labels and are not externally authenticated",
+    "peer evidence does not yet expire automatically",
+    "decision receipts are not yet durably chained"
+  ]
 }
