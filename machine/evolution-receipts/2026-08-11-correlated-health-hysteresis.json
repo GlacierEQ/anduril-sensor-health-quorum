@@ -1,0 +1,30 @@
+{
+  "schema": "glaciereq.repo-evolution-receipt.v1",
+  "repository": "GlacierEQ/anduril-sensor-health-quorum",
+  "consumed_cursor": "next:correlated_fault_detection_recovery_hysteresis_and_explainable_weighting",
+  "candidate_source_sha": "eaf59fa675a2f0e21a58242cd5a78ab3ea656a19",
+  "workflow_run": 31453906929,
+  "proof": {"python": "PASS", "go": "PASS"},
+  "implemented": [
+    "correlation-aware reporter grouping by fault domain",
+    "one effective independent weight per fault domain regardless of reporter multiplicity",
+    "domain-level explainable health and weighting receipts",
+    "fail-closed recovery requiring independent-domain evidence",
+    "multiple distinct recovery round IDs before reinstatement",
+    "Python and Go parity for suspension, correlation weighting, hysteresis, and receipt observability",
+    "repaired machine/target-contract.json from unresolved Git conflict markers to valid canonical JSON"
+  ],
+  "preserved_invariants": [
+    "below-threshold sensors lose voting authority",
+    "correlated reporter multiplicity cannot manufacture independent recovery quorum",
+    "one favorable threshold crossing cannot reinstate a suspended sensor",
+    "repository identity and lineage remain independent"
+  ],
+  "truth_boundaries": [
+    "fault_domain and round_id are caller-supplied evidence labels and are not externally authenticated by this mechanism",
+    "stored peer evidence has no expiry/freshness horizon yet",
+    "decision receipts are observable in memory but are not yet chained to a durable append-only receipt ledger",
+    "no Anduril affiliation or production sensor-control deployment is claimed"
+  ],
+  "next_cursor": "next:authenticated_fault_domain_attestation_evidence_freshness_and_durable_decision_receipt_chain"
+}
