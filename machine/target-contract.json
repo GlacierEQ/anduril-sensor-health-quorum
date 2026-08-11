@@ -1,9 +1,12 @@
 {
   "schema": "glaciereq.repo-target-contract.v1",
-<<<<<<< HEAD
-  "identity": {"repository_id": "GlacierEQ/anduril-sensor-health-quorum"},
+  "identity": {
+    "repository_id": "GlacierEQ/anduril-sensor-health-quorum",
+    "family": "elite-estate",
+    "canonical_identity": "sensor-health-quorum"
+  },
   "current": {
-    "principal_state": "PROMOTED",
+    "state": "EVOLVING",
     "implemented": true,
     "tested": true,
     "adversarial_verified": true,
@@ -13,52 +16,45 @@
     "deployed": false
   },
   "target": {
-    "purpose": "Prevent failed or noisy sensors from retaining equal voting authority in fusion by making sensor health, suspension, and reinstatement explicit quorum-governed state.",
-    "central_bottleneck": "Fusion becomes unreliable when degraded sensors continue voting without health-sensitive authority and reinstatement control.",
+    "purpose": "Prevent failed, noisy, or correlated sensors from retaining disproportionate voting authority by making health, correlation domains, suspension, and bounded reinstatement explicit quorum-governed state.",
+    "central_bottleneck": "A simple per-report EMA can mistake many correlated reports for independent evidence and can reinstate a suspended sensor after one favorable threshold crossing.",
+    "current_cursor": "next:correlated_fault_detection_recovery_hysteresis_and_explainable_weighting",
     "success": [
-      "Peer health scores influence sensor eligibility.",
-      "Below-threshold sensors are suspended rather than silently trusted.",
-      "Reinstatement requires quorum evidence rather than a unilateral status flip."
+      "Reports from the same fault domain do not multiply independent quorum weight.",
+      "Health decisions expose domain-level scores, effective weights, transitions, and recovery state.",
+      "Below-threshold sensors remain suspended rather than silently trusted.",
+      "Reinstatement requires multiple distinct healthy recovery rounds backed by a minimum number of independent domains.",
+      "Python and Go preserve the same authority semantics."
     ]
   },
   "invariants": [
+    "correlated reporters cannot manufacture independent quorum authority by multiplicity alone",
     "degraded sensors cannot retain normal voting authority below the health threshold",
-    "reinstatement requires quorum",
-    "health-state transitions remain observable and testable"
+    "reinstatement is fail-closed without distinct round identity and independent-domain evidence",
+    "health-state transitions remain observable and testable",
+    "repository identity and lineage remain preserved"
   ],
   "donor_plan": {
     "status": "RESOLVED",
     "strategy": "INDEPENDENT_MECHANISM_PRESERVED",
     "donors": [],
-    "basis": "The current repository owns the implemented sensor-health quorum mechanism; no donor implementation is required to define or operate it.",
+    "basis": "The repository owns the sensor-health quorum mechanism; evolution deepens it in place.",
     "future_extraction": "Reusable health-quorum semantics may be extracted only with lineage, functional/proof equivalence, and preservation of this repository's identity."
   },
   "promotion": {
-    "required_tests": ["unit", "adversarial", "operability"],
+    "required_tests": ["unit", "adversarial", "operability", "python_go_parity"],
     "require_exact_source_sha": true,
     "require_receipt": true,
     "require_nonclaims": true
   },
-  "nonclaims": ["no Anduril affiliation", "reference engineering system, not a production sensor-fusion deployment"]
-=======
-  "identity": {
-    "repository_id": "GlacierEQ/anduril-sensor-health-quorum",
-    "family": "elite-estate"
-  },
-  "current": {
-    "state": "PROMOTED",
-    "implemented": true,
-    "tested": true,
-    "deployed": false
-  },
   "nonclaims": [
-    "no employer affiliation",
-    "no production deployment without receipt"
+    "no Anduril affiliation",
+    "reference engineering system, not a production sensor-fusion deployment",
+    "fault_domain and round_id are caller-supplied evidence labels; this mechanism does not authenticate their external provenance"
   ],
-  "donor_plan": {
-    "mode": "none",
-    "donors": []
+  "repair": {
+    "reason": "Removed unresolved Git conflict markers that made the prior target contract invalid JSON.",
+    "base_sha": "c0d3949f8aa3614db7fcb52127ee05edcdcb38ab"
   },
-  "frozen_at": "2026-08-10T04:12Z"
->>>>>>> ce9c2b6 (chore: Hyper Excellence Activation & structural matrix alignment)
+  "frozen_at": "2026-08-11T02:50:00Z"
 }
