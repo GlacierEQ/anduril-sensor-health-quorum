@@ -28,31 +28,33 @@ class SensorHealthEvolutionTests(unittest.TestCase):
             [(row.fault_domain, row.reporters) for row in receipt.domain_weights],
             [("rack-a", ("a1", "a2")), ("rack-b", ("b1",))],
         )
-        self.assertTrue(all(abs(row.effective_weight - 0.5) < 1e-12 for row in receipt.domain_weights))
+        self.assertTrue(
+            all(abs(row.effective_weight - 0.5) < 1e-12 for row in receipt.domain_weights)
+        )
         self.assertAlmostEqual(receipt.observed_health, (0.3 + 0.9) / 2)
 
     def test_correlated_multiplicity_cannot_fake_independent_recovery(self):
         q = SensorHealthQuorum(
             suspend_below=0.4,
-            reinstate_above=0.65,
+            reinstate_above=0.55,
             required_recovery_rounds=2,
             min_recovery_domains=2,
         )
-        q.report("bad-a", "sensor-x", 0.0, fault_domain="rack-a")
-        q.report("bad-b", "sensor-x", 0.0, fault_domain="rack-b")
+        q.report("bad", "sensor-x", 0.0, fault_domain="rack-a")
         self.assertFalse(q.can_vote("sensor-x"))
 
-        # Many favorable reporters from one correlated domain still count once.
         for reporter in ("good-1", "good-2", "good-3"):
             receipt = q.report(
                 reporter,
                 "sensor-x",
                 1.0,
-                fault_domain="rack-c",
+                fault_domain="rack-a",
                 round_id="round-1",
             )
+        self.assertEqual(receipt.independent_domains, 1)
         self.assertGreaterEqual(receipt.smoothed_score, q.reinstate_above)
-        self.assertEqual(receipt.reason, "INSUFFICIENT_INDEPENDENT_DOMAINS" if receipt.independent_domains < 2 else receipt.reason)
+        self.assertEqual(receipt.reason, "INSUFFICIENT_INDEPENDENT_DOMAINS")
+        self.assertEqual(receipt.recovery_streak, 0)
         self.assertFalse(q.can_vote("sensor-x"))
 
     def test_recovery_requires_distinct_rounds_and_independent_domains(self):
@@ -66,7 +68,6 @@ class SensorHealthEvolutionTests(unittest.TestCase):
         q.report("b", "sensor-x", 0.0, fault_domain="rack-b")
         self.assertFalse(q.can_vote("sensor-x"))
 
-        # Raise both domain scores; recovery only counts when a distinct round_id is supplied.
         q.report("a", "sensor-x", 1.0, fault_domain="rack-a")
         no_round = q.report("b", "sensor-x", 1.0, fault_domain="rack-b")
         self.assertEqual(no_round.reason, "ROUND_ID_REQUIRED_FOR_RECOVERY")
@@ -90,10 +91,13 @@ class SensorHealthEvolutionTests(unittest.TestCase):
         self.assertEqual(receipt.subject, "sensor-x")
         self.assertEqual(len(receipt.fingerprint()), 64)
         self.assertEqual(q.last_receipt("sensor-x"), receipt)
-        self.assertIn(receipt.reason, {
-            "RECOVERY_THRESHOLD_NOT_MET",
-            "RECOVERY_HYSTERESIS_INCOMPLETE",
-        })
+        self.assertIn(
+            receipt.reason,
+            {
+                "RECOVERY_THRESHOLD_NOT_MET",
+                "RECOVERY_HYSTERESIS_INCOMPLETE",
+            },
+        )
 
     def test_invalid_thresholds_and_empty_evidence_labels_fail_closed(self):
         with self.assertRaises(ValueError):
